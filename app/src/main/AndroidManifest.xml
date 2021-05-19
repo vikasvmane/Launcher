@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.vikasmane.appdatasdk.AppEventListener" android:exported="true">
+        <receiver android:name="com.vikasmane.appdatasdk.PackageChangeReceiver" android:exported="true">
             <intent-filter android:priority="999">
                 <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED"/>
                 <action android:name="android.intent.action.PACKAGE_CHANGED" />

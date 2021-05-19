@@ -11,7 +11,7 @@ import android.widget.Toast
  * Receives App install and uninstall events
  * Notifies device using toast and refreshes appdata list
  */
-class AppEventListener : BroadcastReceiver() {
+class PackageChangeReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         // fetching package names from extras
         val packageName = intent?.data?.encodedSchemeSpecificPart
