@@ -11,7 +11,7 @@ class AppDataProvider {
     companion object {
         val instance = AppDataProvider()
     }
-
+    //Exposes app list data to the observer. Gets updated from fetchAppList
     var appsList = MutableLiveData<MutableList<AppData>>()
 
     /**
