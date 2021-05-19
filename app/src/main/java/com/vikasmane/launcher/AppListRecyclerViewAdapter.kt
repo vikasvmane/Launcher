@@ -1,6 +1,9 @@
 package com.vikasmane.launcher
 
 import android.content.Context
+import android.os.Build
+import android.text.Html
+import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,9 +37,9 @@ class AppListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
         val item = appList[position]
         holder.appTitle.text = item.label.toString()
-        holder.appIcon.setImageDrawable( item.icon)
-        holder.packageName.text = item.packageName
-        holder.activityName.text = item.launcherActivity
+        holder.appIcon.setImageDrawable(item.icon)
+        holder.packageName.text = getHtmlText(context.getString(R.string.package_name, item.packageName))
+        holder.activityName.text = getHtmlText(context.getString(R.string.activity_name, item.launcherActivity))
         holder.versionName.text = item.versionName
         holder.versionCode.text = item.versionCode
         holder.itemView.setOnClickListener {
@@ -48,5 +51,16 @@ class AppListRecyclerViewAdapter(
 
     fun updateList(appList: MutableList<AppData>) {
         this.appList = appList
+    }
+
+    /**
+     * To render html formatting in the text
+     */
+    private fun getHtmlText(data : String): Spanned {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(data, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            Html.fromHtml(data)
+        }
     }
 }

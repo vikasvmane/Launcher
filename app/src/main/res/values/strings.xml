@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Launcher</string>
+    <string name="package_name">&lt;b&gt;Package&lt;/b&gt;: %1$s</string>
+    <string name="activity_name">&lt;b&gt;Activity&lt;/b&gt;: %1$s</string>
 </resources>
