@@ -2,13 +2,16 @@ package com.vikasmane.appdatasdk
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
+import android.os.Build
 import androidx.lifecycle.MutableLiveData
 
 class AppDataProvider {
 
-    companion object{
+    companion object {
         val instance = AppDataProvider()
     }
+
     var appsList = MutableLiveData<MutableList<AppData>>()
 
     /**
@@ -26,18 +29,37 @@ class AppDataProvider {
                 packageName = resolveInfo.activityInfo.packageName,
                 icon = resolveInfo.activityInfo.loadIcon(packageManager),
                 launcherActivity = resolveInfo.activityInfo.name,
-                versionCode = packageManager.getPackageInfo(
-                    resolveInfo.activityInfo.packageName,
-                    0
-                ).versionCode.toString(),
-                versionName = packageManager.getPackageInfo(
-                    resolveInfo.activityInfo.packageName,
-                    0
-                ).versionName
+                versionCode = getVersionCode(packageManager, resolveInfo),
+                versionName = getVersionName(packageManager, resolveInfo)
             )
             loadList.add(app)
         }
         loadList.sortBy { it.label.toString() }
         appsList.value = loadList
+    }
+
+    /**
+     * Returns versionCode. As packageInfo.versionCode is deprecated.So packageInfo.longVersionCode
+     * to be used(requires API 28)
+     */
+    private fun getVersionCode(packageManager: PackageManager, resolveInfo: ResolveInfo): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            packageManager.getPackageInfo(
+                resolveInfo.activityInfo.packageName,
+                0
+            ).longVersionCode.toString()
+        } else {
+            packageManager.getPackageInfo(
+                resolveInfo.activityInfo.packageName,
+                0
+            ).versionCode.toString()
+        }
+    }
+
+    private fun getVersionName(packageManager: PackageManager, resolveInfo: ResolveInfo): String {
+        return packageManager.getPackageInfo(
+            resolveInfo.activityInfo.packageName,
+            0
+        ).versionName
     }
 }

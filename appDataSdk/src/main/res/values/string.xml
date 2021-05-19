@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_added">%1$s installed successfully</string>
+    <string name="app_removed">%1$s uninstalled successfully</string>
+</resources>
