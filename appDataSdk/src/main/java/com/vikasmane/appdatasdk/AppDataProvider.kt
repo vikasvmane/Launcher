@@ -4,7 +4,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.lifecycle.MutableLiveData
 
-object AppDataSingleton {
+class AppDataProvider {
+
+    companion object{
+        val instance = AppDataProvider()
+    }
     var appsList = MutableLiveData<MutableList<AppData>>()
 
     /**

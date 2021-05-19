@@ -7,7 +7,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.vikasmane.appdatasdk.AppData
-import com.vikasmane.appdatasdk.AppDataSingleton
 import java.util.*
 
 class MainActivity : AppCompatActivity(), AppIconClickListener {

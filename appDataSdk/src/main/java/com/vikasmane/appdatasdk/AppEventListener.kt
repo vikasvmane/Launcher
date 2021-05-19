@@ -16,6 +16,6 @@ class AppEventListener : BroadcastReceiver() {
                 Toast.LENGTH_SHORT
             ).show()
         }
-        context?.packageManager?.let { AppDataSingleton.fetchAppList(it) }
+        context?.packageManager?.let { AppDataProvider.instance.fetchAppList(it) }
     }
 }
