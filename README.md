@@ -1,22 +1,23 @@
 # Launcher
 Android launcher app
 
-- Contains appDataSdk module which exposes app list data to be shown in the sample app
+- Contains appDataSdk module which exposes app list data
+- App showing applist with launcher (consumes appDataSdk module for app list data)
 
 ## Usage
-### addDataSdk
-To get Apps from you device
+### appDataSdk module
+- To get Apps from you device
 ```kotlin
 class AppDataProvider //Main sdk class from appDataSdk module exposes two data points
 
 fun fetchAppList(packageManager: PackageManager) //fetches applist
-var appsList //Exposes app list data to the observer. Gets updated from fetchAppList
+var appsList :MutableLiveData<MutableList<AppData>>() //Exposes app list data to the observer. Gets updated from fetchAppList
 ```
-To get updates of install/uninstall app updates 
+- To get updates of install/uninstall app updates 
 ```kotlin
 class PackageChangeReceiver : BroadcastReceiver() //Receives install/uninstall package update
 ```
-To use PackageChangeReceiver add <receiver> it into your apps AndroidManifest.xml
+- To use PackageChangeReceiver add <receiver> it into your apps AndroidManifest.xml
 ```kotlin
 <receiver android:name="com.vikasmane.appdatasdk.PackageChangeReceiver" android:exported="true">
             <intent-filter android:priority="999">
